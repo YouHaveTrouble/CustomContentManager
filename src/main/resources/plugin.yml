@@ -1,0 +1,6 @@
+name: CustomContentManager
+version: '${project.version}'
+main: me.youhavetrouble.customcontentmanager.CustomContentManager
+api-version: 1.19
+authors: [ YouHaveTrouble ]
+website: https://youhavetrouble.me

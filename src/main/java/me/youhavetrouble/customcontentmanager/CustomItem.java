@@ -4,8 +4,12 @@ import me.youhavetrouble.customcontentmanager.exception.InvalidCustomItemExcepti
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public interface CustomItem extends Listener {
     Material getBaseMaterial();
@@ -13,6 +17,14 @@ public interface CustomItem extends Listener {
     int getCustomModelData();
 
     String getId();
+
+    /**
+     * Returns all recipes for this custom item
+     * @return All recipes for this custom item
+     */
+    default Collection<Recipe> getItemRecipes() {
+        return new ArrayList<>();
+    }
 
     /**
      * Creates ItemStack of custom item. ItemStack returned has to have String custom item tag with item id
@@ -45,6 +57,10 @@ public interface CustomItem extends Listener {
      */
     static CustomItem getCustomItem(String id) {
         return CustomContentManager.getCustomItem(id);
+    }
+
+    static CustomItem getCustomItem(ItemStack itemStack) {
+        return CustomContentManager.getCustomItem(getCustomItemIdFromItemStack(itemStack));
     }
 
     /**

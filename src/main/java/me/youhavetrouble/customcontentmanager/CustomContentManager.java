@@ -1,6 +1,7 @@
 package me.youhavetrouble.customcontentmanager;
 
 import me.youhavetrouble.customcontentmanager.exception.InvalidCustomItemException;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -42,9 +43,11 @@ public class CustomContentManager extends JavaPlugin {
         if (!customItem.getId().equals(pdc.get(customItemTag, PersistentDataType.STRING)))
             throw new InvalidCustomItemException("Id in persistent data container needs to be the same as the one in getId()");
 
-        registeredItems.put(customItem.getId(), customItem);
-
         plugin.getServer().getPluginManager().registerEvents(customItem, plugin);
+
+        customItem.getItemRecipes().forEach(Bukkit::addRecipe);
+
+        registeredItems.put(customItem.getId(), customItem);
     }
 
     protected static boolean isCustomItem(ItemStack itemStack) {
@@ -58,6 +61,7 @@ public class CustomContentManager extends JavaPlugin {
 
     protected static CustomItem getCustomItem(String id) {
         if (customItemTag == null) throw new RuntimeException("CCM not initialized");
+        if (id == null) return null;
         return registeredItems.get(id);
     }
 

@@ -8,7 +8,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class CustomContentManager extends JavaPlugin {
     private static CustomContentManager plugin;
@@ -23,6 +23,10 @@ public class CustomContentManager extends JavaPlugin {
 
     public static CustomContentManager getPlugin() {
         return plugin;
+    }
+
+    protected static Collection<CustomItem> getRegisteredItems() {
+        return Collections.unmodifiableCollection(registeredItems.values());
     }
 
     protected static void registerCustomItem(CustomItem customItem) throws InvalidCustomItemException {

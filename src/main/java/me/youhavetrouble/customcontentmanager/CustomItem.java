@@ -76,4 +76,12 @@ public interface CustomItem extends Listener {
         CustomContentManager.registerCustomItem(customItem);
     }
 
+    /**
+     * Returns an immutable collection of all registered custom items
+     * @return Immutable collection of all registered custom items
+     */
+    static Collection<CustomItem> getRegisteredItems() {
+        return CustomContentManager.getRegisteredItems();
+    }
+
 }

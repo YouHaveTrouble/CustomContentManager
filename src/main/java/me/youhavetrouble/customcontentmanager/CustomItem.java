@@ -59,6 +59,9 @@ public interface CustomItem extends Listener {
         return CustomContentManager.getCustomItem(id);
     }
 
+    /**
+     * Gets custom item from itemstack
+     */
     static CustomItem getCustomItem(ItemStack itemStack) {
         return CustomContentManager.getCustomItem(getCustomItemIdFromItemStack(itemStack));
     }
